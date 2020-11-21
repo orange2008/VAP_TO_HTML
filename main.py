@@ -24,9 +24,9 @@ fp = open("vap.html", 'w')
 os.system("dir /b *.png *.jpg *.jpeg *.tif *.tiff *.bmp *.gif *.ico > pictures.vap.tmp")
 os.system("dir /b *.mp4 *.webm *.mov *.mkv *.avi *.flv *.wmv > videos.vap.tmp")
 os.system("dir /b *.mp3 *.ape *.flac *.wav *.m4a > audio.vap.tmp")
-os.system("echo \nEOF > pictures.vap.tmp")
-os.system("echo \nEOF > videos.vap.tmp")
-os.system("echo \nEOF > audio.vap.tmp")
+#os.system("echo \nEOF > pictures.vap.tmp")
+#os.system("echo \nEOF > videos.vap.tmp")
+#os.system("echo \nEOF > audio.vap.tmp")
 pic = open("pictures.vap.tmp")
 vid = open("videos.vap.tmp")
 ado = open("audio.vap.tmp")
@@ -36,21 +36,15 @@ v = ""
 a = ""
 for picline in pic:
     picline = picline.strip("\n")
-    if picline == "EOF":
-        break
     p += '\n<img src="' + str(picline) + '" style="width:100%;"></img>'
 print("Processing Videos...")
 for vidline in vid:
     vidline = vidline.strip("\n")
-    if vidline == "EOF":
-        break
-    v = '\n<video src="' + str(vidline) + '" controls></video>'
+    v += '\n<video src="' + str(vidline) + '" controls></video>'
 print("Processing Audio...")
 for adoline in ado:
     adoline = adoline.strip("\n")
-    if adoline == "EOF":
-        break
-    a = '\n<audio src="' + str(adoline) + '" controls="controls"></audio>'
+    a += '\n<audio src="' + str(adoline) + '" controls="controls"></audio>'
 
 print("Writting to file...")
 fp.write("<!DOCTYPE HTML>\n<HTML>\n<HEAD><TITLE>VAP OUTPUT</TITLE>\n</HEAD>\n<BODY>\n" + str(p) + "\n" + str(v) + "\n" + str(a) + "\n</BODY>\n</HTML>")
@@ -58,8 +52,8 @@ pic.close()
 vid.close()
 ado.close()
 fp.close()
-os.remove("pictures.vap.tmp")
-os.remove("videos.vap.tmp")
-os.remove("audio.vap.tmp")
+#os.remove("pictures.vap.tmp")
+#os.remove("videos.vap.tmp")
+#os.remove("audio.vap.tmp")
 print("Done.")
 os.system("vap.html")
